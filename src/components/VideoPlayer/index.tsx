@@ -1,10 +1,8 @@
 import styles from './styles.module.css';
 import { useRef, useState } from 'react';
 
-const videoSrc = 'https://assets.mixkit.co/videos/preview/mixkit-portrait-of-a-fashion-woman-with-silver-makeup-39875-large.mp4'
 
-
-export default function VideoPlayer() {
+export default function VideoPlayer({src}: {src: string}) {
     const [playing, setPlaying] = useState(false);
     const video = useRef<HTMLVideoElement>(null);
     const playerBtn = useRef<HTMLButtonElement>(null);
@@ -12,14 +10,13 @@ export default function VideoPlayer() {
     const handlePlay = () => {
         if (playing) {
             video.current?.pause();
-            setPlaying(false);
             playerBtn.current?.classList.remove(styles.hidden);
         }
-        if (!playing) {
+        else {
             video.current?.play();
-            setPlaying(true);
             playerBtn.current?.classList.add(styles.hidden);
         }
+        setPlaying(!playing);
     }
 
     return (
@@ -29,7 +26,7 @@ export default function VideoPlayer() {
             <video
                 ref={video}
                 className={styles.video}
-                src={videoSrc}
+                src={src}
                 controls={false}
                 loop
             />

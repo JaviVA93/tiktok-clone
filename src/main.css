@@ -13,4 +13,5 @@
 body {
   margin: 0;
   font-family: 'Proxima Nova', Arial, Tahoma;
+  overflow: hidden;
 }

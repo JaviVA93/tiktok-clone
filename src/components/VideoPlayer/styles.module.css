@@ -1,5 +1,6 @@
 .wrapper {
-    position: relative
+    position: relative;
+    scroll-snap-align: center;
 }
 
 .video {
