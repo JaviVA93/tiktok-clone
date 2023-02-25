@@ -6,9 +6,11 @@
 }
 
 main {
+  box-sizing: border-box;
   border: 1px solid #fff;
   aspect-ratio: 9/16;
-  max-height: 80vh;
   max-width: 375px;
+  height: auto;
   width: 100vw;
+  overflow-x: hidden;
 }
