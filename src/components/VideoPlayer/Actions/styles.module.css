@@ -3,4 +3,12 @@
     flex-direction: column;
     gap: 7px;
     margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.iconWithNumber {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
 }

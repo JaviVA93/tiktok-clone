@@ -3,8 +3,21 @@ import { useEffect, useRef, useState } from 'react';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver'
 import { VideoActions } from './Actions';
 
+type videoData = {
+    src: string; 
+    isLiked: boolean;
+    userName: string;
+    description: string;
+    song: string; 
+    albumCover: string;
+    numComments: number;
+    likes: number;
+    shares: number;
+}
 
-export default function VideoPlayer({src, isLiked}: {src: string, isLiked: boolean}) {
+export default function VideoPlayer(props: videoData) {
+    console.log(props);
+    const {src, isLiked, userName, description, song, albumCover, numComments, likes, shares} = props;
     const [playing, setPlaying] = useState(false);
     const video = useRef<HTMLVideoElement>(null);
     const playerBtn = useRef<HTMLButtonElement>(null);
@@ -59,7 +72,7 @@ export default function VideoPlayer({src, isLiked}: {src: string, isLiked: boole
                 onClick={handlePlay}
             />
             <div className={styles.actionsWrapper}>
-                <VideoActions isLiked={isLiked}/>
+                <VideoActions {...{isLiked, likes, numComments, shares}}/>
             </div>
             <button
                 ref={playerBtn}
