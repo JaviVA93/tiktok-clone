@@ -12,6 +12,7 @@ const VIDEOS = [
         albumCover: '',
         numComments: '',
         likes: 40,
+        isLiked: true,
         shares: 13,
     },
     {
@@ -23,6 +24,7 @@ const VIDEOS = [
         albumCover: '',
         numComments: '',
         likes: 64,
+        isLiked: false,
         shares: 23,
     },
 ]

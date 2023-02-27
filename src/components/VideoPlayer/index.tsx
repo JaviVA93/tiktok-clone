@@ -1,9 +1,10 @@
 import styles from './styles.module.css';
 import { useEffect, useRef, useState } from 'react';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver'
+import { VideoActions } from './Actions';
 
 
-export default function VideoPlayer({src}: {src: string}) {
+export default function VideoPlayer({src, isLiked}: {src: string, isLiked: boolean}) {
     const [playing, setPlaying] = useState(false);
     const video = useRef<HTMLVideoElement>(null);
     const playerBtn = useRef<HTMLButtonElement>(null);
@@ -48,19 +49,23 @@ export default function VideoPlayer({src}: {src: string}) {
 
     return (
         <div
-            className={styles.wrapper}
-            onClick={handlePlay} >
+            className={styles.wrapper}>
             <video
                 ref={video}
                 className={styles.video}
                 src={src}
                 controls={false}
                 loop
+                onClick={handlePlay}
             />
+            <div className={styles.actionsWrapper}>
+                <VideoActions isLiked={isLiked}/>
+            </div>
             <button
                 ref={playerBtn}
                 type='button'
-                className={styles.playBtn}>
+                className={styles.playBtn}
+                onClick={handlePlay}>
             </button>
         </div>
     )

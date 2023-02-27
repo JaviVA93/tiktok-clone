@@ -1,6 +1,6 @@
 export const SpeechBubble = () => {
     return (
-        <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="35" height="35" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g id="style=doutone">
                 <g id="comment">
                     <path id="vector (Stroke)" fill-rule="evenodd" clip-rule="evenodd"

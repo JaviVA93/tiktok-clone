@@ -20,6 +20,12 @@
     margin: auto;
 }
 
+.actionsWrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
 .hidden {
     display: none;
 }
