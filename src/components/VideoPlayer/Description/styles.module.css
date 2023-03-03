@@ -1,0 +1,13 @@
+.footer {
+    color: white;
+}
+
+.footer a {
+    all: unset;
+    color: white;
+    font-weight: 600;
+}
+
+.footer p {
+    margin: 8px 0;
+}
