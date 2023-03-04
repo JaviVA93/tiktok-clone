@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver'
 import { VideoActions } from './Actions';
 import { VideoDescription } from './Description';
+import { AlbumCover } from './AlbumCover';
 
 type videoData = {
     src: string; 
@@ -18,7 +19,6 @@ type videoData = {
 }
 
 export default function VideoPlayer(props: videoData) {
-    console.log(props);
     const {src, isLiked, userName, description, song, albumCover, numComments, likes, shares, profileUrl} = props;
     const [playing, setPlaying] = useState(false);
     const video = useRef<HTMLVideoElement>(null);
@@ -75,6 +75,9 @@ export default function VideoPlayer(props: videoData) {
             />
             <div className={styles.actionsWrapper}>
                 <VideoActions {...{isLiked, likes, numComments, shares}}/>
+                <AlbumCover 
+                    image={albumCover}
+                    musicLink={'#'} />
             </div>
             <div className={styles.descriptionWrapper}>
                 <VideoDescription 

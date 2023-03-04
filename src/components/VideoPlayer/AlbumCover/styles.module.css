@@ -1,0 +1,40 @@
+.coverWrapper,
+.coverBorder,
+.cover {
+    box-sizing: border-box;
+}
+
+.coverWrapper {
+    width: 49px;
+    height: 49px;
+}
+
+.coverBorder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 5px;
+    background-color: #333333;
+}
+
+.cover {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-position: center;
+    background-size: contain;
+    animation-name: coverRotation;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes coverRotation {
+    from {
+        transform: rotate(0deg)
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
