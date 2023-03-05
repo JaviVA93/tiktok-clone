@@ -1,0 +1,51 @@
+.songTitleWrapper {
+    display: flex;
+    gap: 5px;
+}
+
+.musicIcon {
+    width: 15px;
+    height: 15px;
+    background-image: url('/src/assets/musicImage.png');
+    background-position: center;
+    background-size: contain;
+    flex-shrink: 0;
+}
+
+.songRowWrapper {
+    overflow: hidden;
+}
+
+.songRow {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    animation-name: leftSwept;
+    animation-duration: 5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.songRow div {
+    width: max-content;
+    padding-right: 15px;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.paused {
+    animation-play-state: paused;
+}
+
+.running {
+    animation-play-state: running;
+}
+
+@keyframes leftSwept {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-25%);
+    }
+}

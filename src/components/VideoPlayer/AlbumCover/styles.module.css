@@ -29,6 +29,14 @@
     animation-timing-function: linear;
 }
 
+.paused {
+    animation-play-state: paused;
+}
+
+.running {
+    animation-play-state: running;
+}
+
 @keyframes coverRotation {
     from {
         transform: rotate(0deg)

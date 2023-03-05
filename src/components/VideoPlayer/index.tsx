@@ -4,14 +4,15 @@ import useIntersectionObserver from '../../hooks/useIntersectionObserver'
 import { VideoActions } from './Actions';
 import { VideoDescription } from './Description';
 import { AlbumCover } from './AlbumCover';
+import { SongTitle } from './SongTitle';
 
 type videoData = {
-    src: string; 
+    src: string;
     isLiked: boolean;
     userName: string;
     profileUrl: string;
     description: string;
-    song: string; 
+    song: string;
     albumCover: string;
     numComments: number;
     likes: number;
@@ -19,7 +20,7 @@ type videoData = {
 }
 
 export default function VideoPlayer(props: videoData) {
-    const {src, isLiked, userName, description, song, albumCover, numComments, likes, shares, profileUrl} = props;
+    const { src, isLiked, userName, description, song, albumCover, numComments, likes, shares, profileUrl } = props;
     const [playing, setPlaying] = useState(false);
     const video = useRef<HTMLVideoElement>(null);
     const playerBtn = useRef<HTMLButtonElement>(null);
@@ -28,7 +29,7 @@ export default function VideoPlayer(props: videoData) {
     const handlePlay = () => {
         if (playing)
             pauseVideo();
-        else 
+        else
             playVideo();
 
     }
@@ -51,7 +52,7 @@ export default function VideoPlayer(props: videoData) {
 
         if (video.current.currentTime === 0 && !playing)
             return;
-        
+
         video.current.pause();
         video.current.currentTime = 0;
         playerBtn.current.classList.remove(styles.hidden);
@@ -74,16 +75,19 @@ export default function VideoPlayer(props: videoData) {
                 onClick={handlePlay}
             />
             <div className={styles.actionsWrapper}>
-                <VideoActions {...{isLiked, likes, numComments, shares}}/>
-                <AlbumCover 
+                <VideoActions {...{ isLiked, likes, numComments, shares }} />
+                <AlbumCover
                     image={albumCover}
-                    musicLink={'#'} />
+                    musicLink={'#'}
+                    animationRunning={playing} />
             </div>
             <div className={styles.descriptionWrapper}>
-                <VideoDescription 
+                <VideoDescription
                     userName={userName}
                     profileUrl={profileUrl}
-                    description={description}/>
+                    description={description}
+                    song={song}
+                    playing={playing} />
             </div>
             <button
                 ref={playerBtn}
