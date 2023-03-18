@@ -1,1 +1,3 @@
-## Tik Tok clone project to practice.
+# Tik Tok Clone :iphone:
+
+## Using React & Supabase
