@@ -5,23 +5,34 @@ import { VideoActions } from './Actions';
 import { VideoDescription } from './Description';
 import { AlbumCover } from './AlbumCover';
 import { SongTitle } from './SongTitle';
+import { isVideoLiked, VideoResponseSuccess } from '../../services';
 
-type videoData = {
-    src: string;
-    isLiked: boolean;
-    userName: string;
-    profileUrl: string;
-    description: string;
-    song: string;
-    albumCover: string;
-    numComments: number;
-    likes: number;
-    shares: number;
+type VideoData = {
+    albumCover: string
+    comments: number
+    created_at: string | null
+    description: string
+    id: number
+    likes: number
+    shares: number
+    song: string
+    src: string
+    updated_at: string | null
+    user_id: string
+    users: {
+        id: string
+        username: string
+    } | null
 }
 
-export default function VideoPlayer(props: videoData) {
-    const { src, isLiked, userName, description, song, albumCover, numComments, likes, shares, profileUrl } = props;
+export default function VideoPlayer(props: VideoData) {
+    const { src, users, description, song, albumCover, comments, likes, shares } = props;
+    const numComments = comments;
+    const userName = users?.username || 'N/A';
+    const profileUrl = `/@${userName}`
     const [playing, setPlaying] = useState(false);
+    const [isLiked, setIsLiked] = useState(false);
+    const [isLikedRequested, setIsLikedRequesed] = useState(false);
     const video = useRef<HTMLVideoElement>(null);
     const playerBtn = useRef<HTMLButtonElement>(null);
     const ioEntry = useIntersectionObserver(video, { threshold: 0.2 });
@@ -61,6 +72,17 @@ export default function VideoPlayer(props: videoData) {
 
     if (ioEntry && !ioEntry.isIntersecting && video.current) {
         stopVideo();
+    }
+
+    if (ioEntry && ioEntry.isIntersecting && props.users && !isLikedRequested) {
+        setIsLikedRequesed(true);
+        isVideoLiked(props.id, props.users?.id)
+        .then( res => {
+            console.log('request')
+            if (res.data && res.data.length > 0)
+                setIsLiked(true)
+
+        });
     }
 
     return (

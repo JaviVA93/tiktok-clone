@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react';
 import VideoPlayer from '../VideoPlayer';
 import styles from './styles.module.css';
-
+import { getVideos } from '../../services/index.js'
+import { VideoResponseSuccess } from '../../services/index'
 
 const VIDEOS = [
     {
@@ -31,9 +33,26 @@ const VIDEOS = [
     },
 ]
 export default function FeedVideos() {
+    const [videos, settVideos] = useState<null | VideoResponseSuccess>(null);
+
+    useEffect(() => {
+
+        getVideos().then(response => {
+            if (response.error)
+                return;
+            const videos = response.data;
+            settVideos(videos);
+        })
+
+    }, [])
+
+    if (!videos)
+        return (
+            <>Loading data</>
+        )
     return (
         <>
-            {VIDEOS.map(v => <VideoPlayer key={v.id} {...v} />)}
+            {videos.map(v => <VideoPlayer key={v.id} {...v} />)}
         </>
     )
 }

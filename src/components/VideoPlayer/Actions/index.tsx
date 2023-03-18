@@ -7,20 +7,33 @@ export const VideoActions = (props:
     { isLiked: boolean, likes: number, numComments: number, shares: number }) => {
     const { isLiked, likes, numComments, shares } = props;
     const heartColor = (isLiked) ? '#FF5F5F' : '#FFF';
+
+    const handleLike = () => {
+        console.log('like')
+    };
+
+    const handleSeeComment = () => {
+        console.log('comment')
+    }
+
+    const handleShare = () => {
+        console.log('share')
+    }
+
     return (
         <div className={styles.wrapper}>
-            <div className={styles.iconWithNumber}>
+            <button className={styles.iconWithNumber} onClick={handleLike}>
                 <Heart color={heartColor} />
                 <span>{likes}</span>
-            </div>
-            <div className={styles.iconWithNumber}>
+            </button>
+            <button className={styles.iconWithNumber} onClick={handleSeeComment}>
                 <SpeechBubble />
                 <span>{numComments}</span>
-            </div>
-            <div className={styles.iconWithNumber}>
+            </button>
+            <button className={styles.iconWithNumber} onClick={handleShare}>
                 <Share />
                 <span>{shares}</span>
-            </div>
+            </button>
         </div>
     )
 }
