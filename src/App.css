@@ -8,10 +8,10 @@
 
 main {
   box-sizing: border-box;
-  border: 1px solid #fff;
   aspect-ratio: 9/16;
   height: auto;
   width: 100vw;
+  max-width: 450px;
   overflow-x: hidden;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
