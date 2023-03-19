@@ -1,33 +1,11 @@
 import styles from './styles.module.css';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import useIntersectionObserver from '../../hooks/useIntersectionObserver'
 import { VideoActions } from './Actions';
 import { VideoDescription } from './Description';
 import { AlbumCover } from './AlbumCover';
-import { SongTitle } from './SongTitle';
-import { isVideoLiked, VideoResponseSuccess } from '../../services';
-
-type VideoData = {
-    albumCover: string
-    comments: number
-    created_at: string | null
-    description: string
-    id: number
-    likes: number
-    shares: number
-    song: string
-    src: string
-    updated_at: string | null
-    user_id: string
-    users: {
-        id: string
-        username: string
-    } | {
-        id: string
-        username: string
-    }[] |
-    null
-}
+import { isVideoLiked } from '../../services';
+import { VideoData } from '../../types/videoData'
 
 export default function VideoPlayer(props: VideoData) {
     const { src, users, description, song, albumCover, comments, likes, shares } = props,
