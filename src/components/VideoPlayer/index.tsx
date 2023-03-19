@@ -22,20 +22,27 @@ type VideoData = {
     users: {
         id: string
         username: string
-    } | null
+    } | {
+        id: string
+        username: string
+    }[] |
+    null
 }
 
 export default function VideoPlayer(props: VideoData) {
-    const { src, users, description, song, albumCover, comments, likes, shares } = props;
-    const numComments = comments;
-    const userName = users?.username || 'N/A';
-    const profileUrl = `/@${userName}`
-    const [playing, setPlaying] = useState(false);
-    const [isLiked, setIsLiked] = useState(false);
-    const [isLikedRequested, setIsLikedRequesed] = useState(false);
-    const video = useRef<HTMLVideoElement>(null);
-    const playerBtn = useRef<HTMLButtonElement>(null);
-    const ioEntry = useIntersectionObserver(video, { threshold: 0.2 });
+    const { src, users, description, song, albumCover, comments, likes, shares } = props,
+        videoId = props.id,
+        numComments = comments,
+        userName = (Array.isArray(users)) ? users[0]?.username : users?.username || 'N/A',
+        userId = (Array.isArray(users)) ? users[0]?.id : users?.id || 'N/A',
+        profileUrl = `/@${userName}`
+
+    const [playing, setPlaying] = useState(false),
+        [isLiked, setIsLiked] = useState(false),
+        [isLikedRequested, setIsLikedRequesed] = useState(false),
+        video = useRef<HTMLVideoElement>(null),
+        playerBtn = useRef<HTMLButtonElement>(null),
+        ioEntry = useIntersectionObserver(video, { threshold: 0.2 })
 
     const handlePlay = () => {
         if (playing)
@@ -76,7 +83,7 @@ export default function VideoPlayer(props: VideoData) {
 
     if (ioEntry && ioEntry.isIntersecting && props.users && !isLikedRequested) {
         setIsLikedRequesed(true);
-        isVideoLiked(props.id, props.users?.id)
+        isVideoLiked(videoId, userId)
         .then( res => {
             console.log('request')
             if (res.data && res.data.length > 0)
